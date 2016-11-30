@@ -39,8 +39,8 @@ int main() {
 
 	//initialize density, velocity, and temperature
 	vars.rho				=	inits.calc_density_point(initial_density, max_node);
-	vars.v					=	inits.calc_density_point(initial_velocity, max_node);
-	vars.temperature			=	inits.calc_density_point(initial_temperature, max_node);
+	vars.v					=	inits.calc_velocity_point(initial_velocity, max_node);
+	vars.temperature			=	inits.calc_temperature_point(initial_temperature, max_node);
 
 
 	//initalize the local variable
