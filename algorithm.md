@@ -1,6 +1,6 @@
 #Algorithm for Euler Solver on Convergent-Divergent Duct
 
-1. Start the Computation.
+1. Start the program.
 2. Input the constant parameters, compute another parameters which can be computed by these parameters (like speed of sound).
 3. Compute A(x) with an arbitrary function. 
 4. Initialize the computational point and the initial condition for every variable (velocity, temperature, dst).
@@ -13,4 +13,4 @@
 	* Compute new variable for next time step.
 	* Go back to first step on the loop.
 7. Computation stops after value before minus value after is rather negligible (minimum errors).
-8. Write to file, computation finished.
+8. Write to file, program is finished.
