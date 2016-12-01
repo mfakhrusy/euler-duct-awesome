@@ -9,6 +9,9 @@ DEST			= .
 
 HDRS			= 	global.hpp				\
 				misc/initialization.hpp			\
+				solver/euler_predictor.hpp		\
+				solver/euler_corrector.hpp		\
+				solver/euler_main.hpp			\
 	
 LIBS			=	
 
@@ -25,6 +28,9 @@ PROGRAM			= Euler_Duct
 
 SRCS			= main.cpp					\
 			  misc/initialization.cpp			\
+			  solver/euler_predictor.cpp			\
+			  solver/euler_corrector.cpp			\
+			  solver/euler_main.cpp				\
 
 OBJS			= $(SRCS:.cpp=.o) 	
 

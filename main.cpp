@@ -1,5 +1,6 @@
 #include "global.hpp"
 #include "misc/initialization.hpp"
+#include "solver/euler_main.hpp"
 
 int main() {
 	
@@ -7,6 +8,7 @@ int main() {
 	Parameters parameters;
 	Variables vars;
 	Initialization inits;
+	Euler_Main euler_main;
 
 	//initialization process
 	inits.read_input(parameters);
@@ -25,9 +27,10 @@ int main() {
 	const double &initial_velocity		=	parameters.initial_velocity;
 	const double &initial_temperature	=	parameters.initial_temperature;
 	
-	//initialize grid 
+	//initialize grid and area
 	vars.x 					=	inits.calc_grid_point(ref_length, 0, max_node);
 	vars.area				=	inits.calc_area_point(vars.x, max_node);
+	vars.delta_x				=	vars.x[1] - vars.x[0];	//can be anything since it's homogeneous
 
 	//initialization process -- computed
 	inits.calc_input(parameters, vars);
@@ -42,13 +45,13 @@ int main() {
 	vars.v					=	inits.calc_velocity_point(initial_velocity, max_node);
 	vars.temperature			=	inits.calc_temperature_point(initial_temperature, max_node);
 
-
 	//initalize the local variable
 	std::vector<double> &x			=	vars.x;
 	std::vector<double> &area		=	vars.area;
 	std::vector<double> &rho		=	vars.rho;
 	std::vector<double> &v			=	vars.v;
 	std::vector<double> &temperature	=	vars.temperature;
+	double &delta_x				=	vars.delta_x;
 
 	//nondimensionalize the variables
 	inits.nondimensionalization(x, ref_length);
@@ -61,7 +64,6 @@ int main() {
 //		std::cout << i << " " << x[i] << " " << area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << std::endl;
 //	}
 
-
-
-	
+	//main computation process
+	euler_main.calc_main_computation(vars, parameters);
 }

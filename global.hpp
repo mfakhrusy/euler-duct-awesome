@@ -39,6 +39,9 @@ struct Variables {
 	std::vector<double> rho;
 	std::vector<double> temperature;
 	std::vector<double> area;
+	
+	//assume: homogeneous delta_x
+	double delta_x;
 
 };
 

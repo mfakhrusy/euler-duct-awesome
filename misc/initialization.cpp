@@ -122,9 +122,11 @@ std::vector<double> Initialization::calc_area_point (std::vector<double> x, int 
 std::vector<double> Initialization::calc_density_point (double initial_density, int max_node) {
 	
 	std::vector<double> density;
-	for (auto i = 0; i < max_node; i++) {
+	density.push_back(0);
+	for (auto i = 1; i < max_node - 1; i++) {		//from 1 ~ max_node -1, 0 and max_node index will be computed via BC
 		density.push_back(initial_density);
 	}
+	density.push_back(0);
 	return density;
 }
 
@@ -132,9 +134,11 @@ std::vector<double> Initialization::calc_density_point (double initial_density, 
 std::vector<double> Initialization::calc_velocity_point (double initial_velocity, int max_node) {
 	
 	std::vector<double> velocity;
-	for (auto i = 0; i < max_node; i++) {
+	velocity.push_back(0);
+	for (auto i = 1; i < max_node - 1; i++) {		//from 1 ~ max_node -1, 0 and max_node index will be computed via BC
 		velocity.push_back(initial_velocity);
 	}
+	velocity.push_back(0);
 	return velocity;
 }
 
@@ -142,8 +146,10 @@ std::vector<double> Initialization::calc_velocity_point (double initial_velocity
 std::vector<double> Initialization::calc_temperature_point (double initial_temperature, int max_node) {
 	
 	std::vector<double> temperature;
-	for (auto i = 0; i < max_node; i++) {
+	temperature.push_back(0);
+	for (auto i = 1; i < max_node - 1; i++) {		//from 1 ~ max_node -1, 0 and max_node index will be computed via BC
 		temperature.push_back(initial_temperature);
 	}
+	temperature.push_back(0);
 	return temperature;
 }
