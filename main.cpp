@@ -45,6 +45,7 @@ int main() {
 	vars.v					=	inits.calc_velocity_point(initial_velocity, max_node);
 	vars.temperature			=	inits.calc_temperature_point(initial_temperature, max_node);
 
+
 	//initalize the local variable
 	std::vector<double> &x			=	vars.x;
 	std::vector<double> &area		=	vars.area;
@@ -59,6 +60,7 @@ int main() {
 	inits.nondimensionalization(rho, total_density);
 	inits.nondimensionalization(v, total_sound_speed);
 	inits.nondimensionalization(temperature, total_temperature);
+	inits.nondimensionalization(delta_x, ref_length);
 
 //	for (auto i = 0; i<x.size(); i++) {
 //		std::cout << i << " " << x[i] << " " << area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << std::endl;

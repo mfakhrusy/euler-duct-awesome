@@ -14,6 +14,7 @@ class Euler_Predictor {
 		std::vector<double> calc_predictor_energy(Variables vars, double gamma, int max_node);
 
 
+
 };
 
 #endif

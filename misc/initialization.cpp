@@ -9,6 +9,12 @@ void Initialization::nondimensionalization(std::vector<double> &var, double ref)
 	}
 }
 
+//function nondimensionalization
+void Initialization::nondimensionalization(double &var, double ref) {
+
+	var = var/ref;
+}
+
 //function read_input
 void Initialization::read_input(Parameters &parameters) {
 
@@ -153,3 +159,4 @@ std::vector<double> Initialization::calc_temperature_point (double initial_tempe
 	temperature.push_back(0);
 	return temperature;
 }
+
