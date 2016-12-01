@@ -2,10 +2,9 @@
 #define EULER_MAIN_H
 
 #include "../global.hpp"
-#include "euler_predictor.hpp"
 #include "euler_corrector.hpp"
 
-class Euler_Main: protected Euler_Predictor, protected Euler_Corrector  {
+class Euler_Main: protected Euler_Corrector  {
 	private:
 		double calc_main_bc_neuman(double first_value, double second_value);
 		double calc_main_bc_dirichlet(double value);
