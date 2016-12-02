@@ -4,8 +4,21 @@
 #include "../global.hpp"
 #include "euler_corrector.hpp"
 
-class Euler_Main: protected Euler_Corrector  {
+struct Variables_Predictor {
+	std::vector<double> rho_predictor;
+	std::vector<double> v_predictor;
+	std::vector<double> temperature_predictor;
+};
+
+class A {
+	public:
+		double c;
+};
+
+class Euler_Main: public Euler_Corrector {
+
 	private:
+		Variables_Predictor vars_predictor;
 
 		std::vector<double> drho_dt_predictor;
 		std::vector<double> dv_dt_predictor;
@@ -27,25 +40,28 @@ class Euler_Main: protected Euler_Corrector  {
 
 		//boundary condition functions
 		void calc_main_bc_impose(Variables &vars, Parameters parameters);
+		void calc_main_bc_impose(Variables_Predictor &vars_predictor, Parameters parameters);
+
 		double calc_main_bc_neuman(double first_value, double second_value);
 		double calc_main_bc_dirichlet(double value);
 
 		//compute delta_t
 		double calc_main_delta_t(Variables vars, std::vector<double> sound_speed, double cfl, int max_node);
 
-		//averaging function
-		std::vector<double> calc_main_average(std::vector<double> dF_dt_predictor, std::vector<double> dF_dt_corrector);
-
 		//main final function
 		std::vector<double> calc_main_basic_formula(std::vector<double> F, std::vector<double> dF_dt, double delta_t, int max_node);
 
+		//averaging function
+		std::vector<double> calc_main_average(std::vector<double> dF_dt_predictor, std::vector<double> dF_dt_corrector, int max_node);
+
+		//error computation
+		double calc_main_error(std::vector<double> dF_dt_predictor, std::vector<double> dF_dt_corrector, int max_node);
 	
 	public:
 		void calc_main_computation(Variables &vars, Parameters parameters);
 	
 	
 	
-	friend class Euler_Corrector;	
 };
 
 #endif

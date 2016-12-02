@@ -3,7 +3,7 @@
 
 std::vector<double> Euler_Predictor::calc_predictor_continuity(Variables vars, int max_node) {
 	
-	std::vector<double> drho_dt(max_node + 1);
+	std::vector<double> drho_dt(max_node);
 	
 	//make local variables
 	std::vector<double> &rho	=	vars.rho;
@@ -19,14 +19,14 @@ std::vector<double> Euler_Predictor::calc_predictor_continuity(Variables vars, i
 		
 		drho_dt[i] = drho_dt_1 + drho_dt_2 + drho_dt_3;
 	}
-	drho_dt[max_node]	=	0;
+	drho_dt[max_node - 1]	=	0;
 
 	return drho_dt;
 }
 
 std::vector<double> Euler_Predictor::calc_predictor_momentum(Variables vars, double gamma, int max_node) {
 	
-	std::vector<double> dv_dt(max_node + 1);
+	std::vector<double> dv_dt(max_node);
 	
 	//make local variables
 	std::vector<double> &rho		=	vars.rho;
@@ -43,14 +43,14 @@ std::vector<double> Euler_Predictor::calc_predictor_momentum(Variables vars, dou
 		
 		dv_dt[i] = dv_dt_1 - (1/gamma)*(dv_dt_2 + dv_dt_3);
 	}
-	dv_dt[max_node]	=	0;
+	dv_dt[max_node - 1]	=	0;
 
 	return dv_dt;
 }
 
 std::vector<double> Euler_Predictor::calc_predictor_energy(Variables vars, double gamma, int max_node) {
 	
-	std::vector<double> dT_dt(max_node + 1);
+	std::vector<double> dT_dt(max_node);
 	
 	//make local variables
 	std::vector<double> &v			=	vars.v;
@@ -68,7 +68,7 @@ std::vector<double> Euler_Predictor::calc_predictor_energy(Variables vars, doubl
 		dT_dt[i] = dT_dt_1 + dT_dt_2*(dT_dt_3 + dT_dt_4);
 
 	}
-	dT_dt[max_node]	=	0;
+	dT_dt[max_node - 1]	=	0;
 
 	return dT_dt;
 }

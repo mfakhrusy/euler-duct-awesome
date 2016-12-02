@@ -1,6 +1,6 @@
 11		max_node
-10		max_iter
-0.0001		error_max
+1000		max_iter
+0.02		error_max
 1.4		gamma
 286.9		individual_gas_constant_of_air
 0.5		corant_number
@@ -9,4 +9,4 @@
 3.0		reference_length
 300		initial_static_temperature
 1.17		initial_static_density
-10		initial_static_velocity
+50		initial_static_velocity

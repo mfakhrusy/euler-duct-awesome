@@ -62,10 +62,6 @@ int main() {
 	inits.nondimensionalization(temperature, total_temperature);
 	inits.nondimensionalization(delta_x, ref_length);
 
-//	for (auto i = 0; i<x.size(); i++) {
-//		std::cout << i << " " << x[i] << " " << area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << std::endl;
-//	}
-
 	//main computation process
 	euler_main.calc_main_computation(vars, parameters);
 }
