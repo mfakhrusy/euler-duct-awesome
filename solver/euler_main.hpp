@@ -10,7 +10,7 @@ struct Variables_Predictor {
 	std::vector<double> temperature_predictor;
 };
 
-class Euler_Main: public Euler_Corrector {
+class Euler_Main: protected Euler_Corrector {
 
 	private:
 		Variables_Predictor vars_predictor;
@@ -36,7 +36,6 @@ class Euler_Main: public Euler_Corrector {
 		//boundary condition functions
 		void calc_main_bc_impose(Variables &vars, Parameters parameters);
 		void calc_main_bc_impose(Variables_Predictor &vars_predictor, Parameters parameters);
-
 		double calc_main_bc_neuman(double first_value, double second_value);
 		double calc_main_bc_dirichlet(double value);
 
@@ -54,9 +53,7 @@ class Euler_Main: public Euler_Corrector {
 	
 	public:
 		void calc_main_computation(Variables &vars, Parameters parameters);
-	
-	
-	
+
 };
 
 #endif

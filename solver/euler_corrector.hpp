@@ -4,6 +4,7 @@
 #include "../global.hpp"
 #include "euler_predictor.hpp"
 
+//forward struct declaration
 struct Variables_Predictor;
 
 class Euler_Corrector: protected Euler_Predictor {

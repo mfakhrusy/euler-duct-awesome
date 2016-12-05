@@ -5,15 +5,11 @@
 
 class Initialization {
 	private:
-		double calc_stretching(int max_node, int index);
-		
-	public:
-		//two function of nondimensionalize depends on input --> function overloading
-		void nondimensionalization(std::vector<double> &var, double ref);
-		void nondimensionalization(double &var, double ref);
-
-		void read_input(Parameters &parameters);
+		//calculation of some parameters which based on input parameters
 		void calc_input(Parameters &parameters, Variables &vars);
+
+		//calculate some variables for the computation
+		double calc_stretching(int max_node, int index);
 		double calc_sound_speed(double gamma, double gas_constant, double temperature);
 		double calc_area(double x);
 
@@ -24,9 +20,11 @@ class Initialization {
 		std::vector<double> calc_temperature_point(std::vector<double> x, int max_node);
 		std::vector<double> calc_velocity_point(std::vector<double> x, std::vector<double> temperature, int max_node);
 
-//		std::vector<double> calc_density_point(double initial_density, int max_node);
-//		std::vector<double> calc_velocity_point(double initial_velocity, int max_node);
-//		std::vector<double> calc_temperature_point(double initial_temperature, int max_node);
+	
+	public:
+		//2 function for reading input and the other is for calculation of initial conditions
+		void read_input(Parameters &parameters);
+		void calc_initialization_main(Variables &vars, Parameters &parameters);
 
 };
 

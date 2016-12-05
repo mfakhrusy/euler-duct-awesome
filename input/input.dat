@@ -1,4 +1,4 @@
-31		max_node
+31		max_node_ODD_NUMBER_PLEASE
 100000		max_iter
 0.0001		error_max
 1.4		gamma

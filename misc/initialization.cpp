@@ -1,20 +1,6 @@
 #include "../global.hpp"
 #include "initialization.hpp"
 
-//function nondimensionalization
-void Initialization::nondimensionalization(std::vector<double> &var, double ref) {
-	
-	for (auto i = 0; i < var.size(); i++) {
-		var[i]	=	var[i]/ref;
-	}
-}
-
-//function nondimensionalization
-void Initialization::nondimensionalization(double &var, double ref) {
-
-	var = var/ref;
-}
-
 //function read_input
 void Initialization::read_input(Parameters &parameters) {
 
@@ -160,40 +146,24 @@ std::vector<double> Initialization::calc_velocity_point (std::vector<double> x, 
 	return velocity;
 }
 
-/*
-//function calc_density_point
-std::vector<double> Initialization::calc_density_point (double initial_density, int max_node) {
-	
-	std::vector<double> density;
-	density.push_back(0);
-	for (auto i = 1; i < max_node - 1; i++) {		//from 1 ~ max_node -1, 0 and max_node index will be computed via BC
-		density.push_back(initial_density);
-	}
-	density.push_back(0);
-	return density;
-}
+//function calc_initialization_main -> THE MAIN INITIALIZATION PROCESS
+void Initialization::calc_initialization_main (Variables &vars, Parameters &parameters) {
 
-//function calc_velocity_point
-std::vector<double> Initialization::calc_velocity_point (double initial_velocity, int max_node) {
-	
-	std::vector<double> velocity;
-	velocity.push_back(0);
-	for (auto i = 1; i < max_node - 1; i++) {		//from 1 ~ max_node -1, 0 and max_node index will be computed via BC
-		velocity.push_back(initial_velocity);
-	}
-	velocity.push_back(0);
-	return velocity;
-}
+	//make local variables
+	double &ref_length			=	parameters.ref_length;
+	int &max_node				=	parameters.max_node;
 
-//function calc_temperature_point
-std::vector<double> Initialization::calc_temperature_point (double initial_temperature, int max_node) {
-	
-	std::vector<double> temperature;
-	temperature.push_back(0);
-	for (auto i = 1; i < max_node - 1; i++) {		//from 1 ~ max_node -1, 0 and max_node index will be computed via BC
-		temperature.push_back(initial_temperature);
-	}
-	temperature.push_back(0);
-	return temperature;
+	//initialize grid and area
+	vars.x 					=	calc_grid_point(ref_length, 0, max_node);
+	vars.area				=	calc_area_point(vars.x, max_node);
+	vars.delta_x				=	vars.x[1] - vars.x[0];	//can be anything since it's homogeneous
+
+	//initialization process -- computed
+	calc_input(parameters, vars);
+
+	//initialize density, velocity, and temperature
+	vars.rho				=	calc_density_point(vars.x, max_node);
+	vars.temperature			=	calc_temperature_point(vars.x, max_node);
+	vars.v					=	calc_velocity_point(vars.x, vars.temperature, max_node);
+
 }
-*/
