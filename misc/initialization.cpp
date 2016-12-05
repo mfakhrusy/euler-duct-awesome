@@ -125,6 +125,43 @@ std::vector<double> Initialization::calc_area_point (std::vector<double> x, int 
 }
 
 //function calc_density_point
+std::vector<double> Initialization::calc_density_point (std::vector<double> x, int max_node) {
+	
+	std::vector<double> density(max_node);
+	
+	for (auto i = 0; i < max_node; i++) {
+		density[i]	=	1 - 0.3146*x[i];
+	}
+
+	return density;
+}
+
+//function calc_temperature_point
+std::vector<double> Initialization::calc_temperature_point (std::vector<double> x, int max_node) {
+	
+	std::vector<double> temperature(max_node);
+	
+	for (auto i = 0; i < max_node; i++) {
+		temperature[i]	=	1 - 0.2314*x[i];
+	}
+
+	return temperature;
+}
+
+//function calc_velocity_point
+std::vector<double> Initialization::calc_velocity_point (std::vector<double> x, std::vector<double> temperature, int max_node) {
+	
+	std::vector<double> velocity(max_node);
+	
+	for (auto i = 0; i < max_node; i++) {
+		velocity[i]	=	(0.1 + 1.09*x[i])*sqrt(temperature[i]);
+	}
+
+	return velocity;
+}
+
+/*
+//function calc_density_point
 std::vector<double> Initialization::calc_density_point (double initial_density, int max_node) {
 	
 	std::vector<double> density;
@@ -159,4 +196,4 @@ std::vector<double> Initialization::calc_temperature_point (double initial_tempe
 	temperature.push_back(0);
 	return temperature;
 }
-
+*/

@@ -142,7 +142,7 @@ double Euler_Main::calc_main_error(std::vector<double> dF_dt_predictor, std::vec
 			double temp_error 	= 	pow(0.5*(dF_dt_predictor[i] + dF_dt_corrector[i]), 2);
 			error 			=	error + temp_error;
 		}
-		error	=	error/max_node;
+		error	=	fabs(error/max_node);
 		error	=	sqrt(error);
 
 	return error;
@@ -213,7 +213,7 @@ void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
 
 		std::cout << iteration_count << std::endl;
 		for (auto i = 0; i < max_node; i++) {
-			std::cout << rho[i] << " " << v[i] << " " << temperature[i] << std::endl;
+			std::cout << vars.x[i] << " " << vars.area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << v[i]/sqrt(temperature[i]) << std::endl;
 		}
 		std::cout << "THE ERROR: " << error << " " << error_max << std::endl;
 		std::cout << std::endl;

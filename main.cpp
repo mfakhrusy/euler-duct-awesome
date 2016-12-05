@@ -41,9 +41,12 @@ int main() {
 	const double &throat_area		=	parameters.throat_area;
 
 	//initialize density, velocity, and temperature
-	vars.rho				=	inits.calc_density_point(initial_density, max_node);
-	vars.v					=	inits.calc_velocity_point(initial_velocity, max_node);
-	vars.temperature			=	inits.calc_temperature_point(initial_temperature, max_node);
+	//vars.rho				=	inits.calc_density_point(initial_density, max_node);
+	//vars.v					=	inits.calc_velocity_point(initial_velocity, max_node);
+	//vars.temperature			=	inits.calc_temperature_point(initial_temperature, max_node);
+	vars.rho				=	inits.calc_density_point(vars.x, max_node);
+	vars.temperature			=	inits.calc_temperature_point(vars.x, max_node);
+	vars.v					=	inits.calc_velocity_point(vars.x, vars.temperature, max_node);
 
 
 	//initalize the local variable
@@ -55,13 +58,16 @@ int main() {
 	double &delta_x				=	vars.delta_x;
 
 	//nondimensionalize the variables
-	inits.nondimensionalization(x, ref_length);
-	inits.nondimensionalization(area, throat_area);
-	inits.nondimensionalization(rho, total_density);
-	inits.nondimensionalization(v, total_sound_speed);
-	inits.nondimensionalization(temperature, total_temperature);
-	inits.nondimensionalization(delta_x, ref_length);
+//	inits.nondimensionalization(x, ref_length);
+//	inits.nondimensionalization(area, throat_area);
+//	inits.nondimensionalization(rho, total_density);
+//	inits.nondimensionalization(v, total_sound_speed);
+//	inits.nondimensionalization(temperature, total_temperature);
+//	inits.nondimensionalization(delta_x, ref_length);
 
 	//main computation process
 	euler_main.calc_main_computation(vars, parameters);
+
+
+	return 0;
 }

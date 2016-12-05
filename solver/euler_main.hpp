@@ -10,11 +10,6 @@ struct Variables_Predictor {
 	std::vector<double> temperature_predictor;
 };
 
-class A {
-	public:
-		double c;
-};
-
 class Euler_Main: public Euler_Corrector {
 
 	private:
