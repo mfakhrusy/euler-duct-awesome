@@ -1,4 +1,3 @@
-#include "../global.hpp"
 #include "euler_main.hpp"
 #include "euler_predictor.hpp"
 
@@ -211,12 +210,12 @@ void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
 		//compute error
 		error		=	calc_main_error(drho_dt_predictor, drho_dt_corrector, max_node);
 
-		std::cout << iteration_count << std::endl;
-		for (auto i = 0; i < max_node; i++) {
-			std::cout << vars.x[i] << " " << vars.area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << v[i]/sqrt(temperature[i]) << std::endl;
-		}
-		std::cout << "THE ERROR: " << error << " " << error_max << std::endl;
-		std::cout << std::endl;
+//		std::cout << iteration_count << std::endl;
+//		for (auto i = 0; i < max_node; i++) {
+//			std::cout << vars.x[i] << " " << vars.area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << v[i]/sqrt(temperature[i]) << std::endl;
+//		}
+//		std::cout << "THE ERROR: " << error << " " << error_max << std::endl;
+//		std::cout << std::endl;
 
 		if (iteration_count > max_iter) break;
 	} while(error > error_max);

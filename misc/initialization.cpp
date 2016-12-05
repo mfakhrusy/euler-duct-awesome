@@ -1,4 +1,5 @@
-#include "../global.hpp"
+#include <sstream>
+#include <fstream>
 #include "initialization.hpp"
 
 //function read_input

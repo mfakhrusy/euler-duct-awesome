@@ -4,8 +4,6 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#include <fstream>
-#include <sstream>
 
 struct Parameters {
 
@@ -19,6 +17,7 @@ struct Parameters {
 	double total_temperature;
 	double total_density;
 	double ref_length;
+
 	//3 values below is the initial condition of calculation
 	double initial_temperature;
 	double initial_density;

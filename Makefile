@@ -12,6 +12,7 @@ HDRS			= 	global.hpp				\
 				solver/euler_predictor.hpp		\
 				solver/euler_corrector.hpp		\
 				solver/euler_main.hpp			\
+				misc/raw_output.hpp			\
 	
 LIBS			=	
 
@@ -31,6 +32,7 @@ SRCS			= main.cpp					\
 			  solver/euler_predictor.cpp			\
 			  solver/euler_corrector.cpp			\
 			  solver/euler_main.cpp				\
+			  misc/raw_output.cpp				\
 
 OBJS			= $(SRCS:.cpp=.o) 	
 

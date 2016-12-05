@@ -1,4 +1,3 @@
-#include "../global.hpp"
 #include "euler_predictor.hpp"
 
 std::vector<double> Euler_Predictor::calc_predictor_continuity(Variables vars, int max_node) {

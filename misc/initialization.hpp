@@ -4,6 +4,7 @@
 #include "../global.hpp"
 
 class Initialization {
+
 	private:
 		//calculation of some parameters which based on input parameters
 		void calc_input(Parameters &parameters, Variables &vars);
@@ -19,7 +20,6 @@ class Initialization {
 		std::vector<double> calc_density_point(std::vector<double> x, int max_node);
 		std::vector<double> calc_temperature_point(std::vector<double> x, int max_node);
 		std::vector<double> calc_velocity_point(std::vector<double> x, std::vector<double> temperature, int max_node);
-
 	
 	public:
 		//2 function for reading input and the other is for calculation of initial conditions

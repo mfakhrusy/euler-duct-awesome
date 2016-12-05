@@ -1,4 +1,3 @@
-#include "../global.hpp"
 #include "euler_corrector.hpp"
 #include "euler_main.hpp"
 
