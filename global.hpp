@@ -38,6 +38,9 @@ struct Variables {
 	std::vector<double> rho;
 	std::vector<double> temperature;
 	std::vector<double> area;
+	std::vector<double> pressure;
+	std::vector<double> mach;
+	std::vector<double> mass_flow;
 	
 	//assume: homogeneous delta_x
 	double delta_x;

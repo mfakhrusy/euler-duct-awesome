@@ -5,8 +5,6 @@
 
 class Raw_Output {
 
-	private:
-
 	public:
 		void print_raw_output(Variables vars, Parameters parameters);
 

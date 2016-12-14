@@ -110,6 +110,58 @@ double Euler_Main::calc_main_delta_t(Variables vars, std::vector<double> sound_s
 	return delta_t_final;
 }
 
+//function for calc_main_mach
+std::vector<double> Euler_Main::calc_main_mach(Variables vars, int max_node) {
+	
+	std::vector<double> mach(max_node);
+
+	//make local vars
+	std::vector<double> &v			=	vars.v;
+	std::vector<double> &temperature	=	vars.temperature;
+
+	for (auto i = 0; i < max_node; i++) {
+		mach[i]	=	v[i]/sqrt(temperature[i]);
+	}
+
+	return mach;
+}
+
+//function for calc_main_pressure
+std::vector<double> Euler_Main::calc_main_pressure(std::vector<double> temperature, double gamma) {
+	
+	const int max_node	=	temperature.size();
+	std::vector<double> pressure(max_node);
+
+	double temp	=	gamma/(gamma - 1);
+	for (auto i = 0; i < max_node; i++) {
+		pressure[i]	=	pow(temperature[i], temp);
+	}
+
+
+	return pressure;
+
+}
+
+//function for calc_main_mass_flow
+std::vector<double> Euler_Main::calc_main_mass_flow(Variables vars) {
+	
+	//make local vars
+	std::vector<double> rho		=	vars.rho;
+	std::vector<double> v		=	vars.v;
+	std::vector<double> area	=	vars.area;
+
+	const int max_node		=	rho.size();
+	std::vector<double> mass_flow(max_node);
+
+	
+	for (auto i = 0; i < max_node; i++) {
+		mass_flow[i]	=	rho[i]*v[i]*area[i];
+	}
+
+	return mass_flow;
+	
+}
+
 std::vector<double> Euler_Main::calc_main_basic_formula(std::vector<double> F, std::vector<double> dF_dt, double delta_t, int max_node) {
 	
 	std::vector<double> new_F(max_node);
@@ -180,7 +232,7 @@ void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
 		delta_t			=	calc_main_delta_t(vars, sound_speed_array, cfl, max_node);
 		
 		//predictor step
-			drho_dt_predictor	=	calc_predictor_continuity(vars, max_node);
+		drho_dt_predictor	=	calc_predictor_continuity(vars, max_node);
 		dv_dt_predictor		=	calc_predictor_momentum(vars, gamma, max_node);
 		dT_dt_predictor		=	calc_predictor_energy(vars, gamma, max_node);
 	
@@ -206,19 +258,19 @@ void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
 		rho			=	calc_main_basic_formula(rho, drho_dt_average, delta_t, max_node);
 		v			=	calc_main_basic_formula(v, dv_dt_average, delta_t, max_node);
 		temperature		=	calc_main_basic_formula(temperature, dT_dt_average, delta_t, max_node);
-	
+
 		//compute error
 		error		=	calc_main_error(drho_dt_predictor, drho_dt_corrector, max_node);
-
-//		std::cout << iteration_count << std::endl;
-//		for (auto i = 0; i < max_node; i++) {
-//			std::cout << vars.x[i] << " " << vars.area[i] << " " << rho[i] << " " << v[i] << " " << temperature[i] << " " << v[i]/sqrt(temperature[i]) << std::endl;
-//		}
-//		std::cout << "THE ERROR: " << error << " " << error_max << std::endl;
-//		std::cout << std::endl;
-
+		
 		if (iteration_count > max_iter) break;
 	} while(error > error_max);
 
+	std::vector<double> &mach		=	vars.mach;
+	std::vector<double> &pressure		=	vars.pressure;
+	std::vector<double> &mass_flow		=	vars.mass_flow;
+	//calculate mach, pressure, mass_flow
+	mach		=	calc_main_mach(vars, max_node);	
+	pressure	=	calc_main_pressure(temperature, gamma);
+	mass_flow	=	calc_main_mass_flow(vars);
 }
 

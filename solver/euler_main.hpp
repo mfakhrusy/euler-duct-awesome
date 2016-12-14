@@ -33,6 +33,15 @@ class Euler_Main: protected Euler_Corrector {
 		//calculate speed of sound
 		std::vector<double> calc_main_sound_speed(Parameters &parameters, std::vector<double> temperature);
 
+		//calculate mach
+		std::vector<double> calc_main_mach(Variables vars, int max_node);
+
+		//calculate pressure
+		std::vector<double> calc_main_pressure(std::vector<double> temperature, double gamma);
+
+		//calculate mass flow rate
+		std::vector<double> calc_main_mass_flow(Variables vars);
+
 		//boundary condition functions
 		void calc_main_bc_impose(Variables &vars, Parameters parameters);
 		void calc_main_bc_impose(Variables_Predictor &vars_predictor, Parameters parameters);
