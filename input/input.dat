@@ -4,9 +4,9 @@
 1.4		gamma
 286.9		individual_gas_constant_of_air
 0.5		courant_number
+3.0		reference_length
 300		total_temperature
 1.17		total_density
-3.0		reference_length
 300		initial_static_temperature
 1.17		initial_static_density
 100		initial_static_velocity

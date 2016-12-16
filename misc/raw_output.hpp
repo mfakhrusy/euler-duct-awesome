@@ -5,6 +5,7 @@
 
 class Raw_Output {
 
+	void print_error(std::vector<double> error_comp);
 	public:
 		void print_raw_output(Variables vars, Parameters parameters);
 

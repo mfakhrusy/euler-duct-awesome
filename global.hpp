@@ -45,6 +45,9 @@ struct Variables {
 	//assume: homogeneous delta_x
 	double delta_x;
 
+	//variables for error for each time step
+	std::vector<double> error_comp;
+
 };
 
 

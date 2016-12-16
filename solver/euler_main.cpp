@@ -201,12 +201,12 @@ double Euler_Main::calc_main_error(std::vector<double> dF_dt_predictor, std::vec
 
 //function for calc_main_computation	->	main looping function
 void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
-	
 
 	//make new local variables
 	std::vector<double> &rho		=	vars.rho;
 	std::vector<double> &v			=	vars.v;
 	std::vector<double> &temperature	=	vars.temperature;
+	std::vector<double> &error_comp		=	vars.error_comp;
 	
 	int max_node				=	parameters.max_node;
 	int max_iter				=	parameters.max_iter;
@@ -261,6 +261,7 @@ void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
 
 		//compute error
 		error		=	calc_main_error(drho_dt_predictor, drho_dt_corrector, max_node);
+		error_comp.push_back(error);
 		
 		if (iteration_count > max_iter) break;
 	} while(error > error_max);
@@ -268,6 +269,7 @@ void Euler_Main::calc_main_computation(Variables &vars, Parameters parameters) {
 	std::vector<double> &mach		=	vars.mach;
 	std::vector<double> &pressure		=	vars.pressure;
 	std::vector<double> &mass_flow		=	vars.mass_flow;
+
 	//calculate mach, pressure, mass_flow
 	mach		=	calc_main_mach(vars, max_node);	
 	pressure	=	calc_main_pressure(temperature, gamma);

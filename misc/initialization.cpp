@@ -39,13 +39,13 @@ void Initialization::read_input(Parameters &parameters) {
 					parameters.cfl = value;
 					break;
 				case 7:
-					parameters.total_temperature = value;
+					parameters.ref_length = value;
 					break;
 				case 8:
-					parameters.total_density = value;
+					parameters.total_temperature = value;
 					break;
 				case 9:
-					parameters.ref_length = value;
+					parameters.total_density = value;
 					break;
 				case 10:
 					parameters.initial_temperature = value;
